@@ -1,3 +1,8 @@
+// Jag har gått igenom appen och funderat på var jag borde lägga till kommentarer, men inte hittat
+// några ställen där jag tycker att det behövs. Tar gärna feedback på om det finns saker som bör
+// kommenteras, men avsaknaden av kommentarer är i alla fall ett medvetet val.
+
+
 package com.katja.colorme
 
 import androidx.appcompat.app.AppCompatActivity

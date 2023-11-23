@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Color Me</string>
+    <string name="no_smaller">Jag kan inte bli mindre nu!</string>
+    <string name="no_bigger">Jag vill inte bli större än så här!</string>
 </resources>
