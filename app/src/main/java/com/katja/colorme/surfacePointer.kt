@@ -80,30 +80,30 @@ class surfacePointer (context: Context): SurfaceView(context), SurfaceHolder.Cal
         stop()
     }
 
+    fun draw() {
+        canvas = holder.lockCanvas()
+        canvas?.let {
+            canvas.drawRect(0f, 0f, viewWidth, (viewHeight / 3), paint1)
+            canvas.drawRect(0f, (viewHeight / 3), viewWidth, ((viewHeight / 3) * 2), paint2)
+            canvas.drawRect(0f, ((viewHeight / 3) * 2), viewWidth, viewHeight, paint3)
+            canvas.drawText("Större", (viewWidth / 2), ((viewHeight / 6) + (textSize / 2)), paintText)
+            canvas.drawText("Mindre", (viewWidth / 2), ((viewHeight / 2) + (textSize / 2)), paintText)
+            canvas.drawText("Färga", (viewWidth / 2), (viewHeight - (viewHeight / 6) + (textSize / 2)), paintText)
+            holder.unlockCanvasAndPost(canvas)
+        }
+    }
+
     override fun run() {
         while (drawing) {
             var canvas: Canvas? = null
             try {
-                canvas = holder.lockCanvas()
                 synchronized(holder) {
-                    if (canvas != null) {
-                        // Draw background color, that should be invisable, for validation.
-                        // canvas.drawColor(Color.BLUE)
-                        canvas.drawRect(0f, 0f, viewWidth, (viewHeight / 3), paint1)
-                        canvas.drawRect(0f, (viewHeight / 3), viewWidth, ((viewHeight / 3)*2), paint2)
-                        canvas.drawRect(0f, ((viewHeight / 3)*2), viewWidth, viewHeight, paint3)
-                        canvas.drawText ("Större", (viewWidth / 2), ((viewHeight / 6)+(textSize / 2)), paintText)
-                        canvas.drawText ("Mindre", (viewWidth / 2), ((viewHeight / 2)+(textSize / 2)), paintText)
-                        canvas.drawText ("Färga", (viewWidth / 2), (viewHeight-(viewHeight / 6)+(textSize / 2)), paintText)
-                    }
+                    draw()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-            } finally {
-                if (canvas != null) {
-                    holder.unlockCanvasAndPost(canvas)
-                }
             }
         }
     }
 }
+
