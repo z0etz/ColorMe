@@ -1,4 +1,6 @@
 package com.katja.colorme
 
-class DisplayFragment {
+import androidx.fragment.app.Fragment
+
+class DisplayFragment: Fragment()  {
 }

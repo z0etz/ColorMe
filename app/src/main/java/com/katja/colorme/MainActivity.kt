@@ -16,5 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportFragmentManager.commit {add(R.id.frameTop, PointerFragment())}
+
+        supportFragmentManager.commit {add(R.id.frameBottom, DisplayFragment())}
     }
 }
