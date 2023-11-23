@@ -8,6 +8,7 @@ import android.view.Gravity.CENTER
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import androidx.core.content.ContentProviderCompat.requireContext
 
 class surfacePointer (context: Context): SurfaceView(context), SurfaceHolder.Callback, Runnable {
     var thread: Thread? = null
@@ -41,16 +42,6 @@ class surfacePointer (context: Context): SurfaceView(context), SurfaceHolder.Cal
         paintText.textSize = textSize
     }
 
-    fun start() {
-        running = true
-        thread = Thread(this)
-        thread?.start()
-    }
-
-    fun stop() {
-        running = false
-        thread?.join()
-    }
 
     fun startDrawing() {
         drawingThread = Thread(this)
@@ -73,12 +64,11 @@ class surfacePointer (context: Context): SurfaceView(context), SurfaceHolder.Cal
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
         viewWidth = width.toFloat()
         viewHeight = height.toFloat()
-        start()
         startDrawing()
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder) {
-        stop()
+        stopDrawing()
     }
 
     fun draw() {
