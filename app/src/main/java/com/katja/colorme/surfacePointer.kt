@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.view.Gravity.CENTER
+import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 
@@ -105,5 +106,36 @@ class surfacePointer (context: Context): SurfaceView(context), SurfaceHolder.Cal
             }
         }
     }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                val x = event.x
+                val y = event.y
+
+                // Check which third of the view was clicked based on y-coordinate
+                val thirdHeight = viewHeight / 3
+
+                when {
+                    y <= thirdHeight -> {
+                        // Top third clicked
+                        println("Större clicked")
+                    }
+
+                    y <= 2 * thirdHeight -> {
+                        // Middle third clicked
+                        println("Mindre clicked")
+                    }
+
+                    else -> {
+                        // Bottom third clicked
+                        println("Färga clicked")
+                    }
+                }
+            }
+        }
+        return true
+    }
+
 }
 
